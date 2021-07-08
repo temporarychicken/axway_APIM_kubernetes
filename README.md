@@ -1,5 +1,5 @@
 # K8s-Demo-Workshop
-![alt text](https://www.nginx.com/wp-content/uploads/2019/05/F5-NGINX-Code-to-Customer_social.png "Logo Title Text 1")
+![alt text](https://www.axway.com/sites/default/files/2019-09/axway.png "Logo Title Text 1")
 
 ## Introduction
 
