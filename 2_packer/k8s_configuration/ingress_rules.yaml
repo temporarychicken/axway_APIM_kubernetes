@@ -4,6 +4,11 @@ apiVersion: extensions/v1beta1
 metadata:
   name: ingressv1
   namespace: default
+  annotations:
+
+    nginx.org/ssl-services: "apimgr,anm,traffic"
+
+    
 spec:
   ingressClassName: nginx
   tls:
@@ -11,56 +16,33 @@ spec:
     - kubernetes.kuberneteslab0001.axwaydemo.net
     - k8sdashboard.kuberneteslab0001.axwaydemo.net
     - ingressdashboard.kuberneteslab0001.axwaydemo.net
+    - apimanager.kuberneteslab0001.axwaydemo.net
+    - apigateway.kuberneteslab0001.axwaydemo.net
+    - api.kuberneteslab0001.axwaydemo.net
+
     secretName: default-server-secret
     
   rules:
-  - host: kubernetes.kuberneteslab0001.axwaydemo.net
-    http:
-      paths:
-      - path: "/dashboard.html"
-        backend:
-          serviceName: nginx-ingress-service
-          servicePort: 8088
-      - path: "/api"
-        backend:
-          serviceName: nginx-ingress-service
-          servicePort: 8088
-      - path: "/"
-        backend:
-          serviceName: nginx-plus-webserver-service
-          servicePort: 80
-
-  - host: ingressdashboard.kuberneteslab0001.axwaydemo.net
-    http:
-      paths:
-      - path: "/dashboard.html"
-        backend:
-          serviceName: nginx-ingress-service
-          servicePort: 8088
-      - path: "/api"
-        backend:
-          serviceName: nginx-ingress-service
-          servicePort: 8088
-
-
-
----
-kind: Ingress
-apiVersion: extensions/v1beta1
-metadata:
-  name: ingressdash
-  namespace: kubernetes-dashboard
-spec:
-  tls:
-  - hosts:
-    - k8sdashboard.kuberneteslab0001.axwaydemo.net
-    secretName: default-server-secret
-    
-  rules:
-  - host: k8sdashboard.kuberneteslab0001.axwaydemo.net
+  - host: apimanager.kuberneteslab0001.axwaydemo.net
     http:
       paths:
       - path: "/"
         backend:
-          serviceName: expose-dashboard-via-nodeport
-          servicePort: 443
+          serviceName: apimgr
+          servicePort: 8075
+
+  - host: apigateway.kuberneteslab0001.axwaydemo.net
+    http:
+      paths:
+      - path: "/"
+        backend:
+          serviceName: anm
+          servicePort: 8090
+          
+  - host: api.kuberneteslab0001.axwaydemo.net
+    http:
+      paths:
+      - path: "/"
+        backend:
+          serviceName: traffic
+          servicePort: 8065         

@@ -6,6 +6,34 @@
 
 
 
+resource "aws_route53_record" "apimanager-kuberneteslab0001" {
+  zone_id = data.aws_route53_zone.selected.zone_id
+  name    = "apimanager.kuberneteslab0001.${data.aws_route53_zone.selected.name}"
+  type    = "A"
+  ttl     = "60"
+  records = [ aws_instance.kuberneteslab0001-k8s-master.public_ip ]
+
+}
+
+resource "aws_route53_record" "apigateway-kuberneteslab0001" {
+  zone_id = data.aws_route53_zone.selected.zone_id
+  name    = "apigateway.kuberneteslab0001.${data.aws_route53_zone.selected.name}"
+  type    = "A"
+  ttl     = "60"
+  records = [ aws_instance.kuberneteslab0001-k8s-master.public_ip ]
+
+}
+
+resource "aws_route53_record" "api-kuberneteslab0001" {
+  zone_id = data.aws_route53_zone.selected.zone_id
+  name    = "api.kuberneteslab0001.${data.aws_route53_zone.selected.name}"
+  type    = "A"
+  ttl     = "60"
+  records = [ aws_instance.kuberneteslab0001-k8s-master.public_ip ]
+
+}
+
+
 
 
 resource "aws_route53_record" "dockerregistry-kuberneteslab0001" {

@@ -82,6 +82,14 @@
         "k8s-base-docker-machine"
       ]
     },
+    {
+      "type": "file",
+      "source": "install_nginx_ingress_controller.sh",
+      "destination": "install_nginx_ingress_controller.sh",
+      "only": [
+        "k8s-base-docker-machine"
+      ]
+    },
      {
       "type": "file",
       "source": "setup_selinux_and_fw.sh",

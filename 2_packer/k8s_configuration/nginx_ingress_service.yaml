@@ -21,8 +21,8 @@ spec:
     port: 8088
     targetPort: 8088
     nodePort: 30088
-  externalTrafficPolicy: Local
+  externalTrafficPolicy: Cluster
   selector:
-    app: nginx-ingress
+    app: my-release-nginx-ingress
     
  

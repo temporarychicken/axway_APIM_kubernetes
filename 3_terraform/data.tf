@@ -11,17 +11,6 @@ data "aws_ami" "k8s-base-machine" {
   }
 }
 
-data "aws_ami" "north-south-router" {
-  most_recent = true
-  owners      = ["self"]
-  filter {
-    name = "tag:Name"
-    values = [
-      "kuberneteslab0001.north-south-router",
-    ]
-  }
-}
-
 # Locate the correct zone from Route53
 
 data "aws_route53_zone" "selected" {
