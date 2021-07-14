@@ -252,6 +252,14 @@
       "only": [
         "k8s-base-docker-machine"
       ]
+    },
+	{
+      "type": "file",
+      "source": "nginx.conf",
+      "destination": "nginx.conf",
+      "only": [
+        "k8s-base-docker-machine"
+      ]
     }
 
   ]

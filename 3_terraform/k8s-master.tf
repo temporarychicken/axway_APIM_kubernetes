@@ -21,6 +21,10 @@ resource "aws_instance" "kuberneteslab0001-k8s-master" {
   	    "./install-kubernetes-master.sh",
 		"./install_nfs_server.sh",
 		"./install_nginx_ingress_controller.sh",
+		"sudo yum install nginx -y",
+		"sudo systemctl enable nginx",
+		"sudo cp nginx.conf /etc/nginx/",
+		"sudo systemctl restart nginx",
 		"#./install_helm_and_APIM.sh",
 		"kubectl patch storageclass my-nfs -p '{\"metadata\": {\"annotations\":{\"storageclass.kubernetes.io/is-default-class\":\"true\"}}}'"
     ]
