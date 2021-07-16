@@ -71,6 +71,24 @@ time terraform apply --auto-approve
 terraform destroy --auto-approve
 ```
 ## Installing APIM and/or Istio
-Neither 
+
+Now that you have your Kubernetes Cluster up and running in AWS, you can install Axway APIM and ISTIO service mesh according to your preference.
+
+First, connect to the K8S master node using:
+```
+# Remove any previous cached key for the domain
+ssh-keygen -R k8s-master.kuberneteslab0001.axwaydemo.net
+# Connnect to the K8s master node
+ssh -i ~/.ssh/k8s-key.pem centos@k8s-master.kuberneteslab0001.axwaydemo.net
+```
+
+To install Axway APIM use:
+```
+install_helm_and_APIM.sh
+```
+ To install ISTIO Service Mesh use:
+ ```
+ ./install_istio.sh
+ ```
 
 

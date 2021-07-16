@@ -53,7 +53,22 @@ resource "null_resource" "displayk8stoken" {
   }
   
         inline = [
+		"echo 'Here is your access token for logging into the Kubernetes Dashboard at https://k8s-master.kuberneteslab0001.axwaydemo.net:32443'",
 		"kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}')"
+
     ]
   }
+  
+
+
+
+  provisioner "local-exec" {
+  
+        command = "echo 'To log into your k8s-master node via ssh and access the kubectl command, together with scripts to install APIM and ISTIO, use:';echo 'ssh-keygen -R k8s-master.kuberneteslab0001.axwaydemo.net';echo 'ssh -i ~/.ssh/k8s-key.pem centos@k8s-master.kuberneteslab0001.axwaydemo.net'"
+  
+  }		
+  
+  
 }
+
+
