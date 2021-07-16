@@ -1,13 +1,17 @@
-# K8s-Demo-Workshop
+# Axway Kubernetes Workshop - Build a K8S cluster from zero, optionally with Axway APIM and Istio Service Mesh
 ![alt text](https://www.axway.com/sites/default/files/2019-09/axway.png "Logo Title Text 1")
 
 ## Introduction
 
-This workshop enables an NGINX-PLUS Kubernetes demo environment to be instantiated in AWS. The key technologies used are Packer, Terraform, Ansible, and bash.
+This workshop creates Kubernetes demo environment that is instantiated in AWS. The key technologies used are Packer, Terraform, Ansible, and bash.
 
-The workshop consists of a fully working OpenSource Kubernetes 3-node cluster (one master, 2 worker-nodes) and a docker registry containing NGINX PLUS and NGINX PLUS ingress controller images.
+The workshop consists of a fully working OpenSource Kubernetes 3-node cluster (one master, 2 worker-nodes) and the following applications:
+* NGINX ingress controller
+* Axway API Management - Includes API Manager, API Gateway, and Node Manager
+* Istio - Service Mesh 
 
-The entire workshop installs and instantiates with the steps below, so will be entirely self-updating for all open-source and commercial software included.
+
+The entire workshop installs and instantiates with the steps below, and will use the latest available version for all open-source and commercial software included.
 
 ## Prerequisites
 
@@ -17,17 +21,14 @@ The entire workshop installs and instantiates with the steps below, so will be e
     export AWS_SECRET_ACCESS_KEY=""
     export AWS_SESSION_TOKEN=""
  ```
+ 
 * The aws CLI tool version 2, available here:
            https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html 
 * Packer - a shell command line tool, install from here:
         https://www.packer.io/docs/install/
 * Terraform - a shell command line tool, install from here:
         https://learn.hashicorp.com/terraform/getting-started/install.html
-* Ansible - a shell command line tool, install from here:
-        https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
- * A valid NGINX PLUS license. This consists of a certifate and key, nginx-repo.crt and nginx-key.crt
-	These certificate and key files should be placed in a directory called ~/.ssh/ngx-certs
- * A domain name registration within AWS Route 53. This can be any domain name of your choosing, the default will be nginxdemo.net which is registered and owned by F5 Networks.
+ * A domain name registration within AWS Route 53. This can be any domain name of your choosing, the default will be axwaydemo.net which is registered and owned by Axway.
  * The git command line tool. This can be installed from the relevant repo with your linux distro.
 
 ## Instructions
@@ -35,20 +36,20 @@ The entire workshop installs and instantiates with the steps below, so will be e
 With the above pre-requisites in place execute the following steps to instantiate the demo workshop:
 
 1. Clone this git repository onto your workstation. This will create a copy of the workshop locally:
-          git clone https://github.com/temporarychicken/K8s-Demo-Workshop.git
+          git clone https://github.com/temporarychicken/axway_APIM_kubernetes
 code block
 
-2. cd into the newly created K8s-Demo-Workshop directory
+2. cd into the newly created axway_APIM_kubernetes directory
 
 3. Run the initiation script configure_workshop_name.sh and enter a subdomain name for your workshop. This must be unique to you, since there may be several other workshops running concurrently. Just stick to lower-case letters and numbers, a good example would be: fredblogs
-6. cd into the step 1_terraform-create-or-refresh-certs directory. This will enable you to create some TLS Certificates for your new domain, which will be, for example, fredblogs.nginxdemo.net
+6. cd into the step 1_terraform-create-or-refresh-certs directory. This will enable you to create some TLS Certificates for your new domain, which will be, for example, fredblogs.axwaydemo.net
 7. Initiate the 1_terraform-create-or-refresh-certs directory by running:
 
 ```
 cd 1_terraform-create-or-refresh-certs
 terraform init
 ```
-8. Apply the terraform plan to create your certificates and keys. You'll get a wildcard cert for your domain, an intermediate cert to tie it back to your root CA, and also a private key.
+8. Apply the terraform plan to create your certificates and keys. You'll get a wildcard cert for your domain, an intermediate cert to tie it back to the root CA, and also a private key.
 ```
 time terraform apply --auto-approve
 ```
@@ -64,12 +65,12 @@ cd ../3_terraform
 terraform init
 time terraform apply --auto-approve
 ```
-12. You now should have, after approximately 6 minutes - a fully working 3 node kubernetes cluster, plus a private docker registry with NGINX PLUS and NGINX PLUS ingress controller images available.
+12. You now should have, after approximately 5 minutes - a fully working 3 node kubernetes cluster.
 13. When you have finished working with the workshop be sure to tear down your workshop
 ```
 terraform destroy --auto-approve
 ```
-# K8S-Workshop-App-Protect
-# K8S-Workshop-App-Protect
-# axway_APIM_kubernetes
-# axway_APIM_kubernetes
+## Installing APIM and/or Istio
+Neither 
+
+
