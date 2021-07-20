@@ -139,14 +139,6 @@
       ]
     },
     {
-      "type": "file",
-      "source": "Dockerfile",
-      "destination": "Dockerfile",
-      "only": [
-        "k8s-base-docker-machine"
-      ]
-    },
-    {
       "type": "shell",
       "inline": [
         "#sudo -H dnf update -y",
