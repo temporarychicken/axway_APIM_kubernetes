@@ -18,7 +18,7 @@
       "access_key": "{{user `aws_access_key`}}",
       "secret_key": "{{user `aws_secret_key`}}",
       "tags": {
-        "Name": "kuberneteslab0001.k8s-base-machine"
+        "Name": "kubernetes0004.k8s-base-machine"
       }
     }
   ],
@@ -34,16 +34,8 @@
     },
     {
       "type": "file",
-      "source": "build_nginx_plus_images.sh",
-      "destination": "build_nginx_plus_images.sh",
-      "only": [
-        "k8s-base-docker-machine"
-      ]
-    },
-    {
-      "type": "file",
-      "source": "build_nginx_plus_ingress_controller_image.sh",
-      "destination": "build_nginx_plus_ingress_controller_image.sh",
+      "source": "bash_scripts",
+      "destination": "~",
       "only": [
         "k8s-base-docker-machine"
       ]
@@ -74,70 +66,16 @@
         "k8s-base-docker-machine"
       ]
     },
-    {
+
+	{
       "type": "file",
-      "source": "install-kubernetes-master.sh",
-      "destination": "install-kubernetes-master.sh",
+      "source": "nginx.conf",
+      "destination": "nginx.conf",
       "only": [
         "k8s-base-docker-machine"
       ]
     },
-    {
-      "type": "file",
-      "source": "install_nginx_ingress_controller.sh",
-      "destination": "install_nginx_ingress_controller.sh",
-      "only": [
-        "k8s-base-docker-machine"
-      ]
-    },
-     {
-      "type": "file",
-      "source": "setup_selinux_and_fw.sh",
-      "destination": "setup_selinux_and_fw.sh",
-      "only": [
-        "k8s-base-docker-machine"
-      ]
-    },
-    {
-      "type": "file",
-      "source": "install_docker.sh",
-      "destination": "install_docker.sh",
-      "only": [
-        "k8s-base-docker-machine"
-      ]
-    },
-    {
-      "type": "file",
-      "source": "setup_registry.sh",
-      "destination": "setup_registry.sh",
-      "only": [
-        "k8s-base-docker-machine"
-      ]
-    },
-    {
-      "type": "file",
-      "source": "install_nfs_server.sh",
-      "destination": "install_nfs_server.sh",
-      "only": [
-        "k8s-base-docker-machine"
-      ]
-    },
-    {
-      "type": "file",
-      "source": "install_helm_and_APIM.sh",
-      "destination": "install_helm_and_APIM.sh",
-      "only": [
-        "k8s-base-docker-machine"
-      ]
-    },
-    {
-      "type": "file",
-      "source": "install_istio.sh",
-      "destination": "install_istio.sh",
-      "only": [
-        "k8s-base-docker-machine"
-      ]
-    },
+
     {
       "type": "shell",
       "inline": [
@@ -145,14 +83,31 @@
 		"#sudo dnf install firewalld -y",
 		"#sudo systemctl enable firewalld",
 		"#sudo systemctl start firewalld",
+		
+		"echo ######################### INSTALLING GIT #############################",
+		"sudo dnf install git -y",
+		
+		"echo ######################## INSTALLING HELM #############################",
+		"curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3",
+		"chmod 700 get_helm.sh",
+		"./get_helm.sh",
+
+		"echo ######################## INSTALLING DOCKER AND SETTING FIREWALL UP FOR FUTURE K8S INSTALL #############################",
 		"sudo cat hosts /etc/hosts",
-		"sudo sh setup_selinux_and_fw.sh",
-		"sudo sh install_docker.sh",
+		"sudo sh bash_scripts/setup_selinux_and_fw.sh",
+		"sudo sh bash_scripts/install_docker.sh",
 		"sudo dnf install bind-utils -y",
 		
         "#sudo -H apt install -y python-pip",
         "#sudo -H pip install ansible",
-		
+
+		"echo ######################## INSTALL NGINX REVERSE PROXY #############################",
+		"sudo yum install nginx -y",
+		"sudo systemctl enable nginx",
+		"sudo cp nginx.conf /etc/nginx/",
+
+		"echo ######################### CREATING A PRIVATE KEY FOR FUTURE SSH ACCESS TO MACHINES USING THIS IMAGE #############################",
+
 		
 		"ssh-keygen -f /tmp/sshkey -q -N ''",
 		"chmod +r /tmp/sshkey",
@@ -211,44 +166,6 @@
       "type": "file",
       "source": "kubeadm.config",
       "destination": "kubeadm.config",
-      "only": [
-        "k8s-base-docker-machine"
-      ]
-    },
-    {
-      "type": "shell",
-      "inline": [
- 
-		"echo '---------------------------------------------------------------------'",
-		"echo '------------- DOWNLOADING NGINX SERVICE MESH PACKAGES ---------------'",
-		"echo '---------------------------------------------------------------------'",
-		"curl https://emea-terraform-and-packer.s3.eu-west-2.amazonaws.com/nginx-meshctl_linux.gz --output nginx-meshctl_linux.gz",
-        "curl https://emea-terraform-and-packer.s3.eu-west-2.amazonaws.com/nginx-mesh-images-0.6.0.tar.gz --output nginx-mesh-images-0.6.0.tar.gz"
-      ],
-      "only": [
-        "k8s-base-docker-machine"
-      ]
-    },
-	{
-      "type": "file",
-      "source": "setup-service-mesh-registry-images.sh",
-      "destination": "setup-service-mesh-registry-images.sh",
-      "only": [
-        "k8s-base-docker-machine"
-      ]
-    },
-	{
-      "type": "file",
-      "source": "install_NGINX_Service_Mesh.sh",
-      "destination": "install_NGINX_Service_Mesh.sh",
-      "only": [
-        "k8s-base-docker-machine"
-      ]
-    },
-	{
-      "type": "file",
-      "source": "nginx.conf",
-      "destination": "nginx.conf",
       "only": [
         "k8s-base-docker-machine"
       ]
