@@ -1,6 +1,6 @@
 
 
-cat certs/kubernetes0004.axwaydemo.net.crt.pem certs/kubernetes0004.axwaydemo.net.issuer.pem >certs/kubernetes0004.axwaydemo.net.fullchain.pem
+cat certs/kubernetes0001.axwaydemo.net.crt.pem certs/kubernetes0001.axwaydemo.net.issuer.pem >certs/kubernetes0001.axwaydemo.net.fullchain.pem
 
 
 echo "Deploying docker registry"
@@ -14,7 +14,7 @@ echo "Deploying docker registry"
 #sudo docker run -d   --restart=always   --name registryX   -v "$(pwd)"/certs:/certs   -e REGISTRY_HTTP_ADDR=0.0.0.0:443 -e REGISTRY_HTTP_TLS_CERTIFICATE=certs/cert.pem   -e REGISTRY_HTTP_TLS_KEY=certs/key.pem  -p 443:443  registry:2
 
 
-sudo docker run -d   --restart=always   --name registryY   -v "$(pwd)"/certs:/certs   -e REGISTRY_HTTP_ADDR=0.0.0.0:443 -e REGISTRY_HTTP_TLS_CERTIFICATE=certs/kubernetes0004.axwaydemo.net.fullchain.pem   -e REGISTRY_HTTP_TLS_KEY=certs/kubernetes0004.axwaydemo.net.key.pem  -p 443:443  registry:2
+sudo docker run -d   --restart=always   --name registryY   -v "$(pwd)"/certs:/certs   -e REGISTRY_HTTP_ADDR=0.0.0.0:443 -e REGISTRY_HTTP_TLS_CERTIFICATE=certs/kubernetes0001.axwaydemo.net.fullchain.pem   -e REGISTRY_HTTP_TLS_KEY=certs/kubernetes0001.axwaydemo.net.key.pem  -p 443:443  registry:2
 
 
 
@@ -33,9 +33,9 @@ echo $NPLUS_IMAGE
 
 # We now have our NGINX PLUS IMAGE... Let's push it to our local secure registry
 
-#sudo sh -c 'echo "127.0.0.1 dockerregistry.kubernetes0004.axwaydemo.net">>/etc/hosts'
+#sudo sh -c 'echo "127.0.0.1 dockerregistry.kubernetes0001.axwaydemo.net">>/etc/hosts'
 
-sudo docker tag $NPLUS_IMAGE dockerregistry.kubernetes0004.axwaydemo.net/nginxplus
-sudo docker push dockerregistry.kubernetes0004.axwaydemo.net/nginxplus
+sudo docker tag $NPLUS_IMAGE dockerregistry.kubernetes0001.axwaydemo.net/nginxplus
+sudo docker push dockerregistry.kubernetes0001.axwaydemo.net/nginxplus
 
 

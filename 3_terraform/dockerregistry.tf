@@ -1,7 +1,7 @@
-resource "aws_instance" "kubernetes0004-docker-registry" {
+resource "aws_instance" "kubernetes0001-docker-registry" {
   ami                         = data.aws_ami.k8s-base-machine.id # eu-west-2
   instance_type               = "t2.small"
-  key_name                    = "k8s-server-key-kubernetes0004"
+  key_name                    = "k8s-server-key-kubernetes0001"
   associate_public_ip_address = true
   security_groups             = [aws_security_group.nginx-web-facing.id]
   subnet_id                   = aws_subnet.main.id
@@ -12,7 +12,7 @@ resource "aws_instance" "kubernetes0004-docker-registry" {
 
 
   tags = {
-    Name = "kubernetes0004-docker-registry"
+    Name = "kubernetes0001-docker-registry"
   }
 }
 
@@ -21,8 +21,8 @@ resource "aws_instance" "kubernetes0004-docker-registry" {
 
 resource "null_resource" "buildimages" {
   triggers = {
-    first_trigger  = aws_route53_record.dockerregistry-kubernetes0004.ttl
-	second_trigger = aws_instance.kubernetes0004-docker-registry.public_ip
+    first_trigger  = aws_route53_record.dockerregistry-kubernetes0001.ttl
+	second_trigger = aws_instance.kubernetes0001-docker-registry.public_ip
   }
 
 
@@ -33,7 +33,7 @@ resource "null_resource" "buildimages" {
     type     = "ssh"
     user     = "centos"
 	private_key = file("~/.ssh/k8s-key.pem")
-    host     = aws_instance.kubernetes0004-docker-registry.public_ip
+    host     = aws_instance.kubernetes0001-docker-registry.public_ip
   }
   
         inline = [

@@ -13,17 +13,17 @@ spec:
   ingressClassName: nginx
   tls:
   - hosts:
-    - kubernetes.kubernetes0004.axwaydemo.net
-    - k8sdashboard.kubernetes0004.axwaydemo.net
-    - ingressdashboard.kubernetes0004.axwaydemo.net
-    - apimanager.kubernetes0004.axwaydemo.net
-    - apigateway.kubernetes0004.axwaydemo.net
-    - api.kubernetes0004.axwaydemo.net
+    - kubernetes.kubernetes0001.axwaydemo.net
+    - k8sdashboard.kubernetes0001.axwaydemo.net
+    - ingressdashboard.kubernetes0001.axwaydemo.net
+    - apimanager.kubernetes0001.axwaydemo.net
+    - apigateway.kubernetes0001.axwaydemo.net
+    - api.kubernetes0001.axwaydemo.net
 
     secretName: default-server-secret
     
   rules:
-  - host: apimanager.kubernetes0004.axwaydemo.net
+  - host: apimanager.kubernetes0001.axwaydemo.net
     http:
       paths:
       - path: "/"
@@ -31,7 +31,7 @@ spec:
           serviceName: apimgr
           servicePort: 8075
 
-  - host: apigateway.kubernetes0004.axwaydemo.net
+  - host: apigateway.kubernetes0001.axwaydemo.net
     http:
       paths:
       - path: "/"
@@ -39,7 +39,7 @@ spec:
           serviceName: anm
           servicePort: 8090
           
-  - host: api.kubernetes0004.axwaydemo.net
+  - host: api.kubernetes0001.axwaydemo.net
     http:
       paths:
       - path: "/"

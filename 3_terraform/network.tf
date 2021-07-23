@@ -2,7 +2,7 @@ resource "aws_vpc" "main" {
   cidr_block = "10.0.0.0/16"
 
   tags = {
-    Name = "k8sDemo-kubernetes0004"
+    Name = "k8sDemo-kubernetes0001"
   }
 }
 
@@ -12,7 +12,7 @@ resource "aws_subnet" "main" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "k8sDemo-kubernetes0004"
+    Name = "k8sDemo-kubernetes0001"
   }
 }
 
@@ -20,7 +20,7 @@ resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name = "k8sDemo-kubernetes0004"
+    Name = "k8sDemo-kubernetes0001"
   }
 }
 
@@ -40,7 +40,7 @@ resource "aws_route_table" "rt" {
 
 
   tags = {
-    Name = "k8sDemo-kubernetes0004"
+    Name = "k8sDemo-kubernetes0001"
   }
 }
 

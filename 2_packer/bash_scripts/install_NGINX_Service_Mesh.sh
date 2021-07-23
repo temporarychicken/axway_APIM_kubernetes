@@ -16,7 +16,7 @@ export PATH=$PATH:$PWD
 
 # Now we will deploy NGINX Service mesh
 
-./nginx-meshctl deploy --nginx-mesh-api-image="dockerregistry.kubernetes0004.axwaydemo.net:443/nginx-mesh-api:0.6.0" --nginx-mesh-metrics-image="dockerregistry.kubernetes0004.axwaydemo.net:443/nginx-mesh-metrics:0.6.0" --nginx-mesh-sidecar-image="dockerregistry.kubernetes0004.axwaydemo.net:443/nginx-mesh-sidecar:0.6.0" --nginx-mesh-init-image="dockerregistry.kubernetes0004.axwaydemo.net:443/nginx-mesh-init:0.6.0"
+./nginx-meshctl deploy --nginx-mesh-api-image="dockerregistry.kubernetes0001.axwaydemo.net:443/nginx-mesh-api:0.6.0" --nginx-mesh-metrics-image="dockerregistry.kubernetes0001.axwaydemo.net:443/nginx-mesh-metrics:0.6.0" --nginx-mesh-sidecar-image="dockerregistry.kubernetes0001.axwaydemo.net:443/nginx-mesh-sidecar:0.6.0" --nginx-mesh-init-image="dockerregistry.kubernetes0001.axwaydemo.net:443/nginx-mesh-init:0.6.0"
 
 # Having deployed the Mesh, let's pull the nginx web server deployment manifest from Kubernetes into a file
 

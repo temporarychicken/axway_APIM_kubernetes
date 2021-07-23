@@ -20,17 +20,17 @@ sudo docker images
 
 # Now let's tag each of those images ready to push to our local workshop registry.
 
-sudo docker tag nginx-mesh-api:0.6.0 dockerregistry.kubernetes0004.axwaydemo.net:443/nginx-mesh-api:0.6.0
-sudo docker tag nginx-mesh-init:0.6.0 dockerregistry.kubernetes0004.axwaydemo.net:443/nginx-mesh-init:0.6.0
-sudo docker tag nginx-mesh-metrics:0.6.0 dockerregistry.kubernetes0004.axwaydemo.net:443/nginx-mesh-metrics:0.6.0
-sudo docker tag nginx-mesh-sidecar:0.6.0 dockerregistry.kubernetes0004.axwaydemo.net:443/nginx-mesh-sidecar:0.6.0
+sudo docker tag nginx-mesh-api:0.6.0 dockerregistry.kubernetes0001.axwaydemo.net:443/nginx-mesh-api:0.6.0
+sudo docker tag nginx-mesh-init:0.6.0 dockerregistry.kubernetes0001.axwaydemo.net:443/nginx-mesh-init:0.6.0
+sudo docker tag nginx-mesh-metrics:0.6.0 dockerregistry.kubernetes0001.axwaydemo.net:443/nginx-mesh-metrics:0.6.0
+sudo docker tag nginx-mesh-sidecar:0.6.0 dockerregistry.kubernetes0001.axwaydemo.net:443/nginx-mesh-sidecar:0.6.0
 
 
 # Finally, we'll push each of those tagged images onto our local workshop registry.
 
-sudo docker push dockerregistry.kubernetes0004.axwaydemo.net:443/nginx-mesh-api:0.6.0
-sudo docker push dockerregistry.kubernetes0004.axwaydemo.net:443/nginx-mesh-init:0.6.0
-sudo docker push dockerregistry.kubernetes0004.axwaydemo.net:443/nginx-mesh-metrics:0.6.0
-sudo docker push dockerregistry.kubernetes0004.axwaydemo.net:443/nginx-mesh-sidecar:0.6.0
+sudo docker push dockerregistry.kubernetes0001.axwaydemo.net:443/nginx-mesh-api:0.6.0
+sudo docker push dockerregistry.kubernetes0001.axwaydemo.net:443/nginx-mesh-init:0.6.0
+sudo docker push dockerregistry.kubernetes0001.axwaydemo.net:443/nginx-mesh-metrics:0.6.0
+sudo docker push dockerregistry.kubernetes0001.axwaydemo.net:443/nginx-mesh-sidecar:0.6.0
 
 # From there, the service mesh can be deployed using the nginx-meshctl command line utility on the k8s control node.

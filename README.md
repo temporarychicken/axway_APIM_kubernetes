@@ -77,9 +77,9 @@ Now that you have your Kubernetes Cluster up and running in AWS, you can install
 First, connect to the K8S master node using:
 ```
 # Remove any previous cached key for the domain
-ssh-keygen -R k8s-master.kubernetes0004.axwaydemo.net
+ssh-keygen -R k8s-master.kubernetes0001.axwaydemo.net
 # Connnect to the K8s master node
-ssh -i ~/.ssh/k8s-key.pem centos@k8s-master.kubernetes0004.axwaydemo.net
+ssh -i ~/.ssh/k8s-key.pem centos@k8s-master.kubernetes0001.axwaydemo.net
 ```
 
 To install Axway APIM use:
